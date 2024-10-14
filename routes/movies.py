@@ -7,23 +7,13 @@ movies=[]
 def get_movies():
     return jsonify(movies)
 
-# @movies_bp.route("/<string:title>",methods=["GET"])
-# def getbytitle(title):
-#     movie = next((b for b in movies if b["title"] == title), None)
-#     if movie is None:
-#         return jsonify({"error": "movie not found"}), 404
-#     return jsonify(movie)
+
 
 @movies_bp.route("/<string:title>", methods=["GET"])
 def get_by_title(title):
-    # Find the movie by title
     movie = next((b for b in movies if b["title"].lower() == title.lower()), None)
-    
-    # Return 404 error if movie not found
     if movie is None:
         return jsonify({"error": "Movie not found"}), 404
-    
-    # Return the movie details as a JSON response
     return jsonify(movie)
 
 
